@@ -51,6 +51,10 @@ python vis_route.py
 </div>
 <p align="center"> Fig.3 Visualize GridWorld Map and agent route</p>
 
+<div align=center>
+<img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_route_large.png" width="80%" height="80%">                 
+</div>
+<p align="center"> Fig.4 Visualize Large GridWorld Map and agent route</p>
 
 
 
