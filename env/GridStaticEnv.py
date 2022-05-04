@@ -48,7 +48,6 @@ class Env():
         return self.position
 
     def render(self):
-        ## 这里还应该去除上一个时刻的状态
         render_map = np.copy(self.map)
         x = self.position[0]
         y = self.position[1]
