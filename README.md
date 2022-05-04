@@ -23,12 +23,17 @@ pip install requirements.txt
 python train.py
 ```
 - Test agent:
-
 ```bash
 python test.py
 ```
 
 ### Show Results
+
+```bash
+python vis_q_table.py
+python vis_reward.py
+python vis_route.py
+```
 
 
 <div align=center>
@@ -45,4 +50,7 @@ python test.py
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_route.png" width="80%" height="80%">                 
 </div>
 <p align="center"> Fig.3 Visualize GridWorld Map and agent route</p>
+
+
+
 
