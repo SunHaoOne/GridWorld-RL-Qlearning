@@ -12,6 +12,7 @@ This repo includes a reinforcement learning environment `GridWorld` and `Q-learn
 
 ### Action Space
 - `Action`: (4, )
+
 | Index | 0    | 1    | 2    | 3     |
 | ----- | ---- | ---- | ---- | ----- |
 | Value | up   | down | left | right |
