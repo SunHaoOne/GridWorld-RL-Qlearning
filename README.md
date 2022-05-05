@@ -8,7 +8,7 @@ A simple reinforcement learning environment based on `numpy`.
 
 ## About The Project
 
-This repo includes a reinforcement learning environment `GridWorld` and `Q-learning` algorithm. And some files for visulize the train and test reward, Q-table, value table and route table.
+This repo includes a reinforcement learning environment `GridWorld` and `Q-learning` algorithm. And some files for visulize the train and test reward, Q-table, value table and route table. The agent will born from a random position in this GridWorld, and the destination is the dense area in this map.
 
 ### Action Space
 - `Action`: (4, )
@@ -26,10 +26,10 @@ This repo includes a reinforcement learning environment `GridWorld` and `Q-learn
 ### Reward Shaping
 
 There are 4 kinds of reward in this environment, including:
-- Time penalty reward (Encourage the agent to reach the destination quickly)
-- Distance reward (Encourage the agent to reach the dense area)
-- Max step reward (if the step > MAX_STEP, reward = -?, done = True)
-- Success reward (if the agent reach the destination, reward = ?, done = True)
+- `Time penalty reward` (Encourage the agent to reach the destination quickly)
+- `Distance reward` (Encourage the agent to reach the dense area)
+- `Max step reward` (if the step > MAX_STEP, reward = -?, done = True)
+- `Success reward` (if the agent reach the destination, reward = ?, done = True)
 
 ## Getting Started
 
