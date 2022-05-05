@@ -53,7 +53,7 @@ python test.py
 
 ### Visulize Environment
 
-Warning: This method only provided a random action for the agent.
+Warning: The agent only chose a `random` action for the agent.
 
 ```bash
 python -m utils.visStaticEnv
@@ -90,7 +90,7 @@ python vis_route.py
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_route_large.png" width="80%" height="80%">                 
 </div>
-<p align="center"> Fig.4 Visualize Large GridWorld Map and agent route</p>
+<p align="center"> Fig.5 Visualize Large GridWorld Map and agent route</p>
 
 
 
