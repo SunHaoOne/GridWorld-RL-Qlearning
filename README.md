@@ -1,5 +1,5 @@
 # GridWorld-RL-Qlearning
-A simple reinforcement learning environment based on numpy. 
+A simple reinforcement learning environment based on `numpy`. 
 
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_q_table.png" width="80%" height="80%"> 
