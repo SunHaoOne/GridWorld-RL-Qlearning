@@ -18,7 +18,7 @@ This repo includes a reinforcement learning environment `GridWorld` and `Q-learn
 | Value | up   | down | left | right |
 ### State Space
 - `State`: (2, )
-- 
+
 | Index | 0    | 1    |
 | ----- | ---- | ---- | 
 | Value | x_pos| y_pos |
