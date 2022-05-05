@@ -27,6 +27,18 @@ python train.py
 python test.py
 ```
 
+### Visulize Environment
+
+Warning: This method only provided a random action for the agent.
+
+```bash
+python -m utils.visStaticEnv
+```
+<div align=center>
+<img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/visStaticEnv.gif" width="20%" height="20%"> 
+</div>
+<p align="center"> Fig.1 Visualize GridWorld Static Environment</p>
+
 ### Show Results
 
 ```bash
@@ -39,17 +51,17 @@ python vis_route.py
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_q_table.png" width="80%" height="80%"> 
 </div>
-<p align="center"> Fig.1 Visualize GridWorld Map, Q table and Value table</p>
+<p align="center"> Fig.2 Visualize GridWorld Map, Q table and Value table</p>
 
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_reward.png" width="50%" height="50%"> 
 </div>
-<p align="center"> Fig.2 Visualize train and test reward</p>
+<p align="center"> Fig.3 Visualize train and test reward</p>
 
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_route.png" width="80%" height="80%">                 
 </div>
-<p align="center"> Fig.3 Visualize GridWorld Map and agent route</p>
+<p align="center"> Fig.4 Visualize GridWorld Map and agent route</p>
 
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/vis_route_large.png" width="80%" height="80%">                 
