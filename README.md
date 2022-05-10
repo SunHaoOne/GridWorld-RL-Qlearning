@@ -114,10 +114,6 @@ python -m planning.a_star_search
 </div>
 <p align="center"> Fig.6 Breach First Search</p>
 
-<div align=center>
-<img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/test.png" width="80%" height="80%"> 
-</div>
-<p align="center"> Fig.6 Breach First Search</p>
 
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/dijkstra_search.png" width="80%" height="80%"> 
