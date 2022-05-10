@@ -99,7 +99,7 @@ if __name__ == "__main__":
     env.render()
     env.p = 0.99
 
-    parents = breadth_first_search(start=START, goal=GOAL)
+    parents = breadth_first_search(env = env, start=START, goal=GOAL)
 
     # visualize_searching(map = env.map, parents = parents)
     visulize_result(map = env.map, parents = parents, start = START, goal = GOAL)

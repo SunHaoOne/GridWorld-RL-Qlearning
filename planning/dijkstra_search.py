@@ -122,7 +122,7 @@ if __name__ == "__main__":
     print(env.cost_map)
     env.p = 0.99
 
-    parents, cost = dijkstra_search(start=START, goal=GOAL)
+    parents, cost = dijkstra_search(env = env, start=START, goal=GOAL)
     print(parents)
     print(cost)
 
