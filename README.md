@@ -118,7 +118,7 @@ python -m planning.a_star_search
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/dijkstra_search.png" width="80%" height="80%"> 
 </div>
-<p align="center"> Fig.7 Dijkstar Search</p>
+<p align="center"> Fig.7 Dijkstra Search</p>
 
 <div align=center>
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/a_star_search.png" width="80%" height="80%"> 
