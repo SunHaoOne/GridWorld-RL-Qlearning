@@ -98,9 +98,9 @@ python vis_route.py
 
 ### Searching Method
 
-- 'Breath First Search'
-- 'Dijkstra'
-- 'Astar'
+- `Breath First Search`
+- `Dijkstra`
+- `Astar`
 
 ```bash
 python -m planning.breadth_first_search
