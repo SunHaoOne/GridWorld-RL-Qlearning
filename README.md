@@ -10,7 +10,7 @@ A simple reinforcement learning environment based on `numpy`.
 
 This repo includes a reinforcement learning environment `GridWorld` and `Q-learning` algorithm. And some files for visualize the train and test `reward`, `Q-table`, `value table` and `route map`. The agent will born from a `random` position in this GridWorld, and the destination is the `dense` area in this map.
 
-Besides, we have added a environment for searching. The methods include 'Breath First Search', 'Dijkstra', 'Astar'
+Besides, we have added a environment for searching. The methods include `Breath First Search`, `Dijkstra Search`, `Astar Search`
 
 ### Action Space
 - `Action`: (4, )
