@@ -98,6 +98,7 @@ python vis_route.py
 
 ### Searching Method
 
+Two kinds of visualization methods is provided in the following codes. Show the `dynamic searching process` or the `final searching result`, the default mode is `final searching result` 
 - `Breath First Search`
 - `Dijkstra`
 - `Astar`
