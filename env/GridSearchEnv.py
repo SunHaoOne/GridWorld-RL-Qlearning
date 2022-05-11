@@ -2,7 +2,7 @@ import numpy as np
 import collections
 import heapq
 
-np.random.seed(0);
+np.random.seed(4);
 
 class Env():
     def __init__(self, height, width):
@@ -11,7 +11,7 @@ class Env():
         self.action_space = [0, 1, 2, 3]
         self.height = height
         self.width = width
-        self.p = 0.9  ## the nums of human percentage in the map
+        self.p = 0.8  ## the nums of human percentage in the map
         # self.map = np.zeros([height, width])
 
         # TODOLIST: if human <= 2 we need to random this map again, to ensure the reward can converge...
