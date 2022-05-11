@@ -1,7 +1,7 @@
 from env.GridSearchEnv import Env, Queue
 import numpy as np
 import matplotlib.pyplot as plt
-
+from vis_q_table import get_patches, convert2matplotlib_cmap
 ## refer to https://www.redblobgames.com/pathfinding/a-star/introduction.html
 
 def breadth_first_search(env, start, goal):
@@ -49,7 +49,7 @@ def visualize_searching(map, parents):
     plt.show()
 
 
-def visulize_result(map, parents, start, goal):
+def get_route_map(map, parents, start, goal):
     route_map = np.copy(map);
     for keys in parents.keys():
         x = keys[0]
@@ -78,14 +78,53 @@ def visulize_result(map, parents, start, goal):
     route_map[goal[0]][goal[1]] = 4;
     final_route_map[goal[0]][goal[1]] = 4;
 
+    return route_map, final_route_map
+
+def visualize_result(map, parents, start, goal):
+    route_map, final_route_map = get_route_map(map, parents, start, goal)
+    route_map = vis_q_map(route_map)
+    final_route_map = vis_q_map(final_route_map)
     ax1 = plt.subplot(1, 2, 1)
     plt.imshow(route_map)
     plt.title('Search Area')
 
     ax2 = plt.subplot(1, 2, 2)
     plt.imshow(final_route_map)
+    cmap_colors = convert2matplotlib_cmap(colors=ACTION_COLORS)
+    patches = get_patches(cmap_colors, labels=ACTION_LABELS)
+    plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
     plt.title('Search Route')
+
+    plt.savefig("../img/breath_first_search.png", bbox_inches = 'tight')
     plt.show()
+
+# beautiful visualize methods....
+
+# map 0
+# obstacle color 1
+# route color 2
+# start color 3
+# end color 4
+
+ACTION_COLORS = {
+    0: (0, 0, 0),
+    1: (142, 207, 201),
+    2: (255, 190, 122),
+    3: (250, 127, 111),
+    4: (130, 176, 210),
+}
+ACTION_LABELS = ["Map", "Wall","Route", "Start", "End"]
+ACTION_SPACE = [key for key in ACTION_COLORS]
+
+def vis_q_map(q_map, action_space=ACTION_SPACE):
+    # visualize the q_map with the ACTION_COLORS
+    # (h, w) -> (h, w, 3)
+    canvas = np.zeros(q_map.shape + (3,), dtype=np.uint8)
+    for action in action_space:
+        canvas[q_map == action] = ACTION_COLORS[action]
+    return canvas
+
+
 
 if __name__ == "__main__":
 
@@ -102,4 +141,4 @@ if __name__ == "__main__":
     parents = breadth_first_search(env = env, start=START, goal=GOAL)
 
     # visualize_searching(map = env.map, parents = parents)
-    visulize_result(map = env.map, parents = parents, start = START, goal = GOAL)
+    visualize_result(map = env.map, parents = parents, start = START, goal = GOAL)

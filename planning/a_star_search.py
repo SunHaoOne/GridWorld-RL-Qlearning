@@ -1,7 +1,7 @@
 from env.GridSearchEnv import Env, PriorityQueue
 import numpy as np
 import matplotlib.pyplot as plt
-
+from vis_q_table import get_patches, convert2matplotlib_cmap
 
 ## A start算法的写法和dijkstar非常类似，只不过修改了这恶鬼代价函数
 
@@ -67,7 +67,7 @@ def visualize_searching(map, parents):
         plt.pause(0.01)
     plt.show()
 
-def visulize_result(map, parents, cost, start, goal):
+def get_route_and_distance_map(map, parents, cost, start, goal):
     route_map = np.copy(map);
     for keys in parents.keys():
         x = keys[0]
@@ -96,23 +96,65 @@ def visulize_result(map, parents, cost, start, goal):
     route_map[goal[0]][goal[1]] = 4;
     final_route_map[goal[0]][goal[1]] = 4;
 
-    ax1 = plt.subplot(1, 3, 1)
+    distance_map = get_distance_map(cost)
+
+    return route_map, final_route_map, distance_map
+
+
+# beautiful visualize methods....
+
+# map 0
+# obstacle color 1
+# route color 2
+# start color 3
+# end color 4
+
+ACTION_COLORS = {
+    0: (0, 0, 0),
+    1: (142, 207, 201),
+    2: (255, 190, 122),
+    3: (250, 127, 111),
+    4: (130, 176, 210),
+}
+ACTION_LABELS = ["Map", "Wall","Route", "Start", "End"]
+ACTION_SPACE = [key for key in ACTION_COLORS]
+
+def vis_q_map(q_map, action_space=ACTION_SPACE):
+    # visualize the q_map with the ACTION_COLORS
+    # (h, w) -> (h, w, 3)
+    canvas = np.zeros(q_map.shape + (3,), dtype=np.uint8)
+    for action in action_space:
+        canvas[q_map == action] = ACTION_COLORS[action]
+    return canvas
+
+
+def visualize_result(map, parents, cost, start, goal):
+
+    route_map, final_route_map, distance_map = get_route_and_distance_map(map, parents, cost, start, goal)
+    route_map = vis_q_map(route_map)
+    final_route_map = vis_q_map(final_route_map)
+
+    ax1 = plt.subplot(2, 2, 1)
     plt.imshow(route_map)
     plt.title('Search Area')
 
-    ax2 = plt.subplot(1, 3, 2)
+    ax2 = plt.subplot(2, 2, 2)
     plt.imshow(final_route_map)
+    cmap_colors = convert2matplotlib_cmap(colors=ACTION_COLORS)
+    patches = get_patches(cmap_colors, labels=ACTION_LABELS)
+    plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
     plt.title('Search Route')
 
-    ax3 = plt.subplot(1, 3, 3)
-    distance_map = get_distance_map(cost)
+    ax3 = plt.subplot(2, 2, 3)
+
     print("Cost Map:", distance_map)
     distance_image = plt.imshow(distance_map);
     plt.colorbar(distance_image, fraction=0.046, pad=0.04)
     plt.title('Cost Map')
-    plt.show()
 
-## 后续修改的时候注意搜索的函数需要传入env这个参数
+
+    plt.savefig("../img/a_star_search.png", bbox_inches = 'tight')
+    plt.show()
 
 if __name__ == "__main__":
 
@@ -130,7 +172,7 @@ if __name__ == "__main__":
     print(parents)
     print(cost)
 
-    visualize_searching(map = env.map, parents = parents)
+    # visualize_searching(map = env.map, parents = parents)
 
-    # visulize_result(map = env.map, parents = parents, cost = cost, start = START, goal = GOAL)
+    visualize_result(map = env.map, parents = parents, cost = cost, start = START, goal = GOAL)
 
