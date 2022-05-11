@@ -36,6 +36,11 @@ There are 4 kinds of reward in this environment, including:
 ## Getting Started
 
 Just download the repositories. And you can also use `conda` to create a new conda enviroment.
+> maybe python 3.6 or 3.7 is available for this repo
+```bash
+conda create -n gridworldenv python=3.8
+conda activate gridworldenv
+```
 ```bash
 git clone https://github.com/SunHaoOne/GridWorld-RL-Qlearning.git
 cd GridWorld-RL-Qlearning
