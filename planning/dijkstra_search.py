@@ -19,7 +19,6 @@ def dijkstra_search(env, start, goal):
             break
 
         for next in env.neighbors(current):
-            # 还需要定义两点之间的代价函数
             new_cost = cost_so_far[current] + env.cost(current, next)
             if next not in cost_so_far or new_cost < cost_so_far[next]:
                 cost_so_far[next] = new_cost
@@ -146,7 +145,7 @@ def visualize_result(map, parents, cost, start, goal):
 
     ax3 = plt.subplot(2, 2, 3)
 
-    print("Cost Map:", distance_map)
+    print(distance_map)
     distance_image = plt.imshow(distance_map);
     plt.colorbar(distance_image, fraction=0.046, pad=0.04)
     plt.title('Cost Map')

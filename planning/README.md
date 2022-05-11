@@ -37,7 +37,7 @@ class PriorityQueue:
     - for example, `{(0, 0): None, (0, 1): (0, 0), (1, 0): (0, 0), (1, 1): (0, 1)}`
 - `env.neighbors(current)`: return the available neighbors of the current position
     - First, find the 4 direction from the current position
-    - Then, remove the edge area or the wall area (using `filter function`)
+    - Then, if the neighbors are in the  edge area or the wall area (using `filter function`), remove them
  
  
  ### 2. Dijkstra Search
@@ -52,6 +52,7 @@ class PriorityQueue:
     - `keys`: end point
     - `values`: cost value
     - for example, `{(0, 0): 0, (0, 1): 8, (1, 0): 9, (1, 1): 11, (2, 0): 14, (3, 0): 15, (4, 0): 18}`
+
  
  ### 3. Astar Search
  
@@ -65,9 +66,10 @@ def heuristic(location_a, location_b):
     return abs(x1 - x2) + abs(y1 - y2)
 ```
  - Contrast to `Dijkstra Search`, the cost function is different.:
-    - `cost_so_far[current] + env.cost(current, next)`
-    - `Dijkstra Search`: `priority = new_cost`
-    - `Astar Search`: `priority = new_cost + heuristic(next, goal)`
+    - First, calculate the cost: `new_cost = cost_so_far[current] + env.cost(current, next)`
+    - The difference between these two method:
+        - `Dijkstra Search`: `priority = new_cost`
+        - `Astar Search`: `priority = new_cost + heuristic(next, goal)`
     - Then put them into the priority queue.
 
 ### 4. Dstar Search
@@ -85,7 +87,7 @@ def heuristic(location_a, location_b):
 - After running the searching algorithm, we can get a `came_from` dictionary, such as `{end_point: start_point, ...}`
 - So we need to backtrack or traverse this dictionary:
     - First, the last_point is the GOAL
-    - Then, we can get the point before the last_point by the dictionary, `last_point = dict[last_point]`
+    - Then, we can get the point (father nodes) before this last_point by the dictionary, `last_point = dict[last_point]`
     - Loop until the last_point is the START
 - `matplotlib.pyplot` is used for dynamic visualization:
     - In the loop, we add the `plt.pause(0.01)` to shows the searching areas.
