@@ -91,13 +91,16 @@ class DStar(object):
 
         elif old_k == x.h:
             for y in self.map.get_neighbors(x):
-                if (y.t == "new" or y.parent == x and y.h != x.h + x.cost(y) or y.parent != x and y.h > x.h + x.cost(
-                        y)) and y != end:
+                if (y.t == "new"
+                    or y.parent == x and y.h != x.h + x.cost(y)
+                    or y.parent != x and y.h > x.h + x.cost(y)) and y != end:
+                    # x的下一个节点是Y， b(X) = Y  X->Y Y的父节点是X
                     y.parent = x
                     self.insert_node(y, x.h + x.cost(y))
         else:
             for y in self.map.get_neighbors(x):
-                if y.t == "new" or y.parent == x and y.h != x.h + x.cost(y):
+                if y.t == "new" \
+                        or y.parent == x and y.h != x.h + x.cost(y):
                     y.parent = x
                     self.insert_node(y, x.h + x.cost(y))
                 else:

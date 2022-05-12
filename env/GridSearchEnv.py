@@ -34,8 +34,9 @@ class Env():
         return results
 
     def cost(self, position, next_position):
-        x = next_position[0]
-        y = next_position[1]
+        # donot use current position
+        x_next = next_position[0]
+        y_next = next_position[1]
         return self.cost_map[x][y]
 
     def in_bound(self, position):
