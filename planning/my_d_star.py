@@ -18,9 +18,12 @@ class PriorityQueue:
 
 open_list = {}
 start = (0, 0)
-open_list[start] = {'t':"open", 'h':10,'k':10}
+open_list[start] = {'p':(1, 0), 't':"open", 'h':10,'k':10}
 print(open_list[start])
 
+# X的下一个节点是Y，b(X) = Y, Y的父节点是X
+
+print("parent", open_list[start]['p'])
 print("state:", open_list[start]['t'])
 print("k:", open_list[start]['h'])
 print("h:", open_list[start]['k'])
@@ -35,8 +38,9 @@ values = [5, 3, 4, 5]
 
 
 for i in range(len(values)):
+    # 根据这个k值进行排序
     frontier.put(positions[i], values[i])
-    open_list[positions[i]] = {'t':"open", 'h':0,'k':0}
+    open_list[positions[i]] = {'p':(2,2),'t':"open", 'h':0,'k':0}
     # cost_so_far[positions[i]]['t'] = "open"
     # cost_so_far[positions[i]]['h'] = 10
     # cost_so_far[positions[i]]['k'] = 10
@@ -46,6 +50,10 @@ for i in range(len(values)):
 
 def min_state(frontier, open_list):
     ## 找到最小的节点后将其pop掉
+    ## 这里还应该添加一个操作，将open_list里的k值和地址加入进这个优先队列中
+    for key in open_list.keys():
+        frontier.put(key, open_list[key]['k'])
+
     if frontier.empty():
         print("Open_List is NULL")
         return None
@@ -54,14 +62,21 @@ def min_state(frontier, open_list):
         open_list[state]['t'] = "close"
     return state, k
 
-from env.GridSearchEnv import Env
+from env.GridSearchDynamicEnv import Env
 
 env = Env(10, 10)
 
 def modify_cost(state, neighbor, env, open_list):
     if open_list[state]['t'] == "close":
-        ##
-        insert_node(state, neighbor, env);
+        insert_node(state, neighbor, env)
+
+
+def modify(state, neighbor, env, open_list):
+    modify_cost(state, neighbor, env, open_list)
+    while True:
+        _, k_min = process_state()
+        if open_list[state]['h'] < k_min:
+            break
 
 def insert_node(state, neighbor, open_list, env):
     ## 初始化的时候，所有的状态应该为new
@@ -75,33 +90,64 @@ def insert_node(state, neighbor, open_list, env):
         open_list[state]['k'] = min(open_list[state]['k'], h_new)
 
     elif t == "close":
-        # 这个条件是针对已规划的cost发生变化的状态
+        # 这个条件是当新的障碍物出现的时候。针对已规划的cost发生变化的状态
         open_list[state]['k'] = min(open_list[state]['k'], h_new)
         open_list[state]['h'] = h_new
         open_list[state]['t'] = "open"
 
 
 def process_state(frontier, open_list):
-    current, k = min_state(frontier, open_list)
+    current, k_old = min_state(frontier, open_list)
     if state is None:
         return -1
     ## 找到最小的值，并且将他们移除
 
-    if k < open_list[current]['h']:
+    if k_old < open_list[current]['h']:
         for next in env.neighbors(current):
-            if k >= open_list[next]['h'] and open_list[current]['h'] > open_list[next]['h'] + env.cost(current, next):
+            if k_old >= open_list[next]['h'] and open_list[current]['h'] > open_list[next]['h'] + env.cost(current, next):
+
+                open_list[current]['p'] = next
                 open_list[current]['h'] = open_list[next]['h'] + env.cost(current, next)
 
-    elif k == open_list[current]['h']:
+    if k_old == open_list[current]['h']:
         for next in env.neighbors(current):
-            if open_list[next]['t'] == "new" or open_list[current]['h'] != open_list[next]['h'] + env.cost(current, next):
-                insert_node(current, next)
+            if open_list[next]['t'] == "new" or \
+                    open_list[next]['p'] == current and open_list[next]['h'] != open_list[current]['h'] + env.cost(current, next) or \
+                    open_list[next]['p'] != current and open_list[next]['h'] > open_list[current]['h'] + env.cost(current, next) and next != (9, 9):
 
+                open_list[next]['p'] = current
+                insert_node(next, current)
 
+    else:
+        for next in env.neighbors(current):
+            if open_list[next]['t'] == "new" or \
+                    open_list[next]['p'] == current and open_list[next]['h'] != open_list[current]['h'] + env.cost(current, next):
 
+                open_list[next]['p'] = current
+                insert_node(next, current)
+            else:
+                if open_list[next]['p'] == current and open_list[next]['h'] > open_list[current]['h'] + env.cost(current, next):
+
+                    insert_node(current, current)
+                else:
+
+                    if open_list[next]['p'] != current and \
+                        open_list[current]['h'] > open_list[next]['h'] + env.cost(current, next) and \
+                        open_list[next]['t'] == "close" and \
+                        open_list[next]['h'] > k_old:
+                        insert_node(next, next)
+
+    return min_state(frontier, open_list)
 
 state, k = min_state(frontier, open_list)
+
 print("min_state:", state)
 print("min_k_value:", k)
 
 print(open_list)
+
+
+## 可以定义y的parent是x， 如果在寻找的过程中发现了这个X->Y->Goal
+
+
+## 这样在设置环境的过程中，neighbors不过滤这个墙的边界

@@ -1,3 +1,11 @@
+# In this environment,
+# Algorithm: D* (Dynamic A* Search)
+
+# Different from the GridSearchEnv, we modified the follow things:
+
+# 1. neighbors lists:
+# neighbors : all the 4 direction of the current node
+
 import numpy as np
 import collections
 import heapq
@@ -27,9 +35,8 @@ class Env():
         neighbors = [(x+1, y), (x-1, y), (x, y-1), (x, y+1)] # E W N S
         # see "Ugly paths" section for an explanation:
         if (x + y) % 2 == 0: neighbors.reverse() # S N W E
-
         results = filter(self.in_bound, neighbors)
-        results = filter(self.passable, results)
+        # results = filter(self.passable, results) 和静态环境描述不同，这里暂时不对墙壁进行过滤
         # 这段代码返回的是迭代器类型的数据，如果想要显示结果，还需要变成List（result）
         return results
 
@@ -37,6 +44,8 @@ class Env():
         # donot use current position
         x_next = next_position[0]
         y_next = next_position[1]
+        if position == next_position:
+            return 0
         return self.cost_map[x_next][y_next]
 
     def in_bound(self, position):
@@ -76,25 +85,6 @@ class Env():
         return coordinate
 
 
-
-
-class Queue:
-    def __init__(self):
-        self.elements = collections.deque()
-
-    def empty(self):
-        return not self.elements
-
-    def put(self, x):
-        self.elements.append(x)
-
-    def get(self):
-        return self.elements.popleft()
-
-
-
-
-
 class PriorityQueue:
     def __init__(self):
         self.elements = []
@@ -106,28 +96,5 @@ class PriorityQueue:
         heapq.heappush(self.elements, (priority, item))
 
     def get(self):
-        return heapq.heappop(self.elements)[1]
-
-
-
-if __name__ == "__main__":
-    env = Env(10, 10)
-    env.render()
-    env.p = 0.98
-
-
-    print("walls:", env.position_walls)
-    print(env.in_bound((3,3)))
-
-    print(env.passable((3,3)))
-    print(env.passable((2,3)))
-
-    # 注意这里是用方括号还是小括号，小括号是tuple而方括号是list类型
-    reached = {}
-    start = (3,3)
-    reached[start] = True;
-    print(reached)
-
-
-
-
+        ## 这里做了一点点修改，我们希望同时返回坐标和k值， 注意：k是最小的h值
+        return heapq.heappop(self.elements)[1], heapq.heappop(self.elements)[0]
