@@ -8,7 +8,7 @@ class Env():
         self.action_space = [0, 1, 2, 3]
         self.height = height
         self.width = width
-        self.p = 0.9  ## the nums of human percentage in the map
+        self.p = 0.95  ## the nums of human percentage in the map
         self.radius = radius
         # self.map = np.zeros([height, width])
 
