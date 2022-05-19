@@ -10,28 +10,9 @@ A simple reinforcement learning environment based on `numpy`.
 
 This repo includes a reinforcement learning environment `GridWorld` and `Q-learning` algorithm. And some files for visualize the train and test `reward`, `Q-table`, `value table` and `route map`. The agent will born from a `random` position in this GridWorld, and the destination is the `dense` area in this map.
 
-Besides, we have added a environment for searching. The methods include `Breath First Search`, `Dijkstra Search`, `Astar Search`
+Besides, we have added a environment for `searching`. The methods include `Breath First Sea
 
-### Action Space
-- `Action`: (4, )
-
-| Index | 0    | 1    | 2    | 3     |
-| ----- | ---- | ---- | ---- | ----- |
-| Value | up   | down | left | right |
-### State Space
-- `State`: (2, )
-
-| Index | 0    | 1    |
-| ----- | ---- | ---- | 
-| Value | x_pos| y_pos |
-
-### Reward Shaping
-
-There are 4 kinds of reward in this environment, including:
-- `Time penalty reward` (Encourage the agent to reach the destination quickly)
-- `Distance reward` (Encourage the agent to reach the dense area)
-- `Max step reward` (if the step > MAX_STEP, reward = -?, done = True)
-- `Success reward` (if the agent reach the destination, reward = ?, done = True)
+Finally, some functions for `visualize matrix` is provided(`utils/visMatrix.py`)
 
 ## Getting Started
 
@@ -100,8 +81,30 @@ python vis_route.py
 </div>
 <p align="center"> Fig.5 Visualize Large GridWorld Map and agent route</p>
 
+## Reinfocement Learning
 
-### Searching Method
+### Action Space
+- `Action`: (4, )
+
+| Index | 0    | 1    | 2    | 3     |
+| ----- | ---- | ---- | ---- | ----- |
+| Value | up   | down | left | right |
+### State Space
+- `State`: (2, )
+
+| Index | 0    | 1    |
+| ----- | ---- | ---- | 
+| Value | x_pos| y_pos |
+
+### Reward Shaping
+
+There are 4 kinds of reward in this environment, including:
+- `Time penalty reward` (Encourage the agent to reach the destination quickly)
+- `Distance reward` (Encourage the agent to reach the dense area)
+- `Max step reward` (if the step > MAX_STEP, reward = -?, done = True)
+- `Success reward` (if the agent reach the destination, reward = ?, done = True)
+
+## Planning Method
 
 Two kinds of visualization methods is provided in the following codes. Show the `dynamic searching process` or the `final searching result`, the default mode is `final searching result` 
 - `Breath First Search`
@@ -129,3 +132,4 @@ python -m planning.a_star_search
 <img src="https://github.com/SunHaoOne/GridWorld-RL-Qlearning/blob/main/img/a_star_search.png" width="80%" height="80%"> 
 </div>
 <p align="center"> Fig.8 Astar Search</p>
+
