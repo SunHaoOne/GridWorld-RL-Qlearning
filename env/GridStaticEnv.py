@@ -31,7 +31,8 @@ class Env():
         return next_state, reward, done
 
     def get_state(self):
-        return self.position
+        # make sure to deep copy the position
+        return np.copy(self.position)
 
     def reset(self):
         self.count = 0;
