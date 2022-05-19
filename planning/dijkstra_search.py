@@ -170,9 +170,9 @@ if __name__ == "__main__":
     print(parents)
     print(cost)
 
-    # visualize_searching(map = env.map, parents = parents)
+    visualize_searching(map = env.map, parents = parents)
 
-    visualize_result(map = env.map, parents = parents, cost = cost, start = START, goal = GOAL)
+    # visualize_result(map = env.map, parents = parents, cost = cost, start = START, goal = GOAL)
 
 
 
