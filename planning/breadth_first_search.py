@@ -95,7 +95,7 @@ def visualize_result(map, parents, start, goal):
     plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
     plt.title('Search Route')
 
-    plt.savefig("../img/breath_first_search.png", bbox_inches = 'tight')
+    plt.savefig("./img/breath_first_search.png", bbox_inches = 'tight')
     plt.show()
 
 # beautiful visualize methods....
