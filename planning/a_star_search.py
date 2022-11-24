@@ -153,7 +153,7 @@ def visualize_result(map, parents, cost, start, goal):
     plt.title('Cost Map')
 
 
-    plt.savefig("../img/a_star_search.png", bbox_inches = 'tight')
+    plt.savefig("./img/a_star_search.png", bbox_inches = 'tight')
     plt.show()
 
 if __name__ == "__main__":
