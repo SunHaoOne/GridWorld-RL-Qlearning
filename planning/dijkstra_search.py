@@ -150,7 +150,7 @@ def visualize_result(map, parents, cost, start, goal):
     plt.colorbar(distance_image, fraction=0.046, pad=0.04)
     plt.title('Cost Map')
 
-    plt.savefig("../img/dijkstra_search.png", bbox_inches = 'tight')
+    plt.savefig("./img/dijkstra_search.png", bbox_inches = 'tight')
     plt.show()
 
 
